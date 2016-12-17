@@ -5,7 +5,11 @@
     {
       "name": "Joe Nelson",
       "email": "bigassdragon@gmail.com"
-    }
+    }, 
+    {
+      "name": "Yale Levine",
+	  "email": "yalelevine@gmail.com"
+	}
   ],
   "dependencies": {
     "babel-cli": "^6.18.0",
