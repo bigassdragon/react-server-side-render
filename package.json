@@ -1,0 +1,8 @@
+{
+	"name": "React Server Side Render App",
+	"descrption": "First pass through for server side rendering.",
+	"contributors": [{
+		"name": "Joe Nelson",
+		"email": "bigassdragon@gmail.com"
+	}]
+}
