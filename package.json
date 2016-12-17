@@ -1,8 +1,14 @@
 {
 	"name": "React Server Side Render App",
 	"descrption": "First pass through for server side rendering.",
-	"contributors": [{
-		"name": "Joe Nelson",
-		"email": "bigassdragon@gmail.com"
-	}]
+	"contributors": [
+		{
+			"name": "Joe Nelson",
+			"email": "bigassdragon@gmail.com"
+		},
+		{
+			"name": "Yale Levine",
+			"email": "yalelevine@gmail.com"
+		}
+	]
 }
