@@ -25,8 +25,7 @@ const Store = {
 	},
 	onChange: function (evt_name, data) {
 		loadStore(evt_name, data);
-
-		if (typeof listeners[evt_name] !== 'undefined') {
+		if (listeners[evt_name] !== undefined) {
 			for (let i = 0, l = listeners[evt_name]; i < l; i++) {
 				listeners[evt_name][i][1].call(listeners[evt_name][i][0], stores[evt_name]);
 			}

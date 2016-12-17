@@ -7,7 +7,7 @@ const Dispatcher = {
 	register: function (evt_name, bind, callback) {
 		let _evt_name = `${_prefix}${evt_name}`;
 
-		if (typeof listeners[_evt_name] === 'undefined') {
+		if (listeners[_evt_name] === undefined) {
 			listeners[_evt_name] = [];
 		}
 
@@ -21,7 +21,7 @@ const Dispatcher = {
 	emitChange: function (evt_name, params) {
 		let _evt_name = `${_prefix}${evt_name}`;
 
-		if (typeof listeners[_evt_name] !== 'undefined') {
+		if (listeners[_evt_name] !== undefined) {
 			for (let i = 0, l = listeners[_evt_name].length; i < l; i++) {
 				listeners[_evt_name][i][1].call(listeners[_evt_name][i][0], evt_name, params);
 			}
