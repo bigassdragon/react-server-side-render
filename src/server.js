@@ -7,12 +7,34 @@ import React from 'react';
 import {renderToString} from 'react-dom/server';
 import {match, RouterContext} from 'react-router';
 import routes from './jsx/routes';
+import webpack from 'webpack';
 
 // initialize the server and configure support for ejs templates
 const app = new Express();
 const server = new Server(app);
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+if (process.env.NODE_ENV === 'development') {
+	const config = require('../webpack.config.dev');
+	const compiler = webpack(config);
+
+	app.use(require('webpack-dev-middleware')(compiler, {
+		noInfo: true,
+		publicPath: config.output.publicPath,
+		stats: {
+			assets: false,
+			colors: true,
+			version: false,
+			hash: false,
+			timings: false,
+			chunks: false,
+			chunkModules: false
+		}
+	}));
+	app.use(require('webpack-hot-middleware')(compiler));
+}
 
 // define the folder that will be used for static assets
 app.use(Express.static(path.join(__dirname, 'static')));
@@ -37,10 +59,10 @@ app.get('*', (req, res) => {
       let markup;
       if (renderProps) {
         // if the current route matched we have renderProps
-        markup = renderToString(<RouterContext {...renderProps}/>);
+        markup = renderToString(<RouterContext {...renderProps} />);
       } else {
         // otherwise we can render a 404 page
-        markup = renderToString(<NotFoundPage/>);
+        markup = renderToString(<NotFoundPage />);
         res.status(404);
       }
 
