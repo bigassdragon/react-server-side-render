@@ -13,27 +13,19 @@ import webpack from 'webpack';
 const app = new Express();
 const server = new Server(app);
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
 
 if (process.env.NODE_ENV === 'development') {
 	const config = require('../webpack.config.dev');
 	const compiler = webpack(config);
 
 	app.use(require('webpack-dev-middleware')(compiler, {
-		noInfo: true,
 		publicPath: config.output.publicPath,
-		stats: {
-			assets: false,
-			colors: true,
-			version: false,
-			hash: false,
-			timings: false,
-			chunks: false,
-			chunkModules: false
-		}
+		noInfo: true
 	}));
 	app.use(require('webpack-hot-middleware')(compiler));
+	app.use(Express.static(path.resolve(__dirname, 'src')));
 }
 
 // define the folder that will be used for static assets
@@ -67,7 +59,19 @@ app.get('*', (req, res) => {
       }
 
       // render the index template with the embedded React markup
-      return res.render('index', {markup});
+      return res.send(`
+      	<!DOCTYPE html>
+      	<html>
+      	  <head>
+      	    <meta charset='utf-8' />
+      	    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+      	  </head>
+      	  <body>
+      	    <div id='app'><div>${markup}</div></div>
+      	    <script src='/js/bundle.js'></script>
+      	  </body>
+      	</html>
+      `);
     }
   );
 });
