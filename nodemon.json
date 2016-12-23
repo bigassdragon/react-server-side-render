@@ -1,0 +1,8 @@
+{
+	"verbose": true,
+	"watch": [
+		"src/server.js",
+		"webpack.config.dev.js"
+	],
+	"exec": "npm run build:dev && npm run babel-node -- src/server.js"
+}

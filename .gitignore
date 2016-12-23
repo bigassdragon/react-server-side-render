@@ -2,3 +2,4 @@
 .idea/
 config/
 node_modules/
+build/

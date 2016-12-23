@@ -26,7 +26,7 @@ const Store = {
 	onChange: function (evt_name, data) {
 		loadStore(evt_name, data);
 		if (listeners[evt_name] !== undefined) {
-			for (let i = 0, l = listeners[evt_name]; i < l; i++) {
+			for (let i = 0, l = listeners[evt_name].length; i < l; i++) {
 				listeners[evt_name][i][1].call(listeners[evt_name][i][0], stores[evt_name]);
 			}
 		}
@@ -36,7 +36,7 @@ const Store = {
 			listeners[evt_name] = [];
 
 			listeners[evt_name].push([bind === null ? this : bind, callback]);
-			Dispatcher.register(evt_name, bind === null ? this : bind, this.onChange);
+			Dispatcher.register(evt_name, this, this.onChange);
 		}
 	},
 	offListen: function (evt_name) {

@@ -25,11 +25,11 @@ if (process.env.NODE_ENV === 'development') {
 		noInfo: true
 	}));
 	app.use(require('webpack-hot-middleware')(compiler));
-	app.use(Express.static(path.resolve(__dirname, 'src')));
+	// app.use(Express.static(path.resolve(__dirname, 'src')));
 }
 
 // define the folder that will be used for static assets
-app.use(Express.static(path.join(__dirname, 'static')));
+app.use(Express.static(path.join(__dirname, '..', 'build')));
 
 // universal routing and rendering
 app.get('*', (req, res) => {
