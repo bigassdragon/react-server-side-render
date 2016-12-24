@@ -29,6 +29,7 @@ class Layout extends React.Component {
 		Store.offListen('layout');
 	}
 	_onChange(store) {
+		console.log('I have updated info now!');
 		this.setState(store);
 	}
 	render() {

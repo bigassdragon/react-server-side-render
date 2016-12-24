@@ -16,11 +16,8 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      loader: ['babel-loader'],
-      exclude: /node_modules/,
-      query: {
-        "presets": ["react-hmre"]
-      }
+      loaders: ['react-hot', 'babel'],
+      exclude: /node_modules/
     }]
   },
   plugins: [
